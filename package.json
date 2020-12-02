@@ -1,7 +1,7 @@
 {
-  "name": "vscode-extension-knight",
-	"displayName": "vscode-extension-knight",
-	"description": "",
+  "name": "knight",
+	"displayName": "@careteen/Knight",
+	"description": "Reading",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.51.0"
@@ -10,13 +10,13 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:vscode-extension-knight.helloWorld"
+		"onCommand:Knight.helloWorld"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "vscode-extension-knight.helloWorld",
+				"command": "Knight.helloWorld",
 				"title": "Hello World"
 			}
 		]
