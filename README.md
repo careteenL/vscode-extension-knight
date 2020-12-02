@@ -1,6 +1,7 @@
 # Knight（vscode extension）
 
 > [Knight](https://baike.baidu.com/item/%E5%8D%93%E5%AE%9A/51002949)(LOL职业选手)酷爱”读书“。
+
 > 书中自有黄金屋，书中自有颜如玉。
 
 ## Usage
@@ -9,7 +10,7 @@
 
 ## Features
 
-📚快乐读书
+📚快乐读书，疯狂输出。
 
 TODO:
 
