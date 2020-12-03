@@ -28,7 +28,8 @@ export class NovelTreeItem extends TreeItem {
   }
 }
 
-const LocalNovelsPath = '/Users/apple/Desktop/sohu/myself/myself-privilege/util/vscode/vscode-extension-knight/books';
+const localNovelsPath = `/Users/careteen/Desktop/repos/careteen/@careteen/vscode-extension-knight/books`;
+// const LocalNovelsPath = '/Users/apple/Desktop/sohu/myself/myself-privilege/util/vscode/vscode-extension-knight/books';
 
 export default class DataProvider implements TreeDataProvider<any> {
   getTreeItem(info: Novel): NovelTreeItem {
@@ -41,13 +42,13 @@ export default class DataProvider implements TreeDataProvider<any> {
 }
 
 export const getLocalBooks = ():  Promise<Novel[]> => {
-  const files = Fs.readdirSync(LocalNovelsPath);
+  const files = Fs.readdirSync(localNovelsPath);
   const localnovellist = [] as any;
   files.forEach((file: string) => {
     const extname = Path.extname(file).substr(1);
-    if (extname === '.txt') {
+    if (extname === 'txt') {
       const name = Path.basename(file, '.txt');
-      const path = Path.join(LocalNovelsPath, file);
+      const path = Path.join(localNovelsPath, file);
       localnovellist.push({ path, name });
     }
   });
