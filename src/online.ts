@@ -19,9 +19,6 @@ export const search = async (keyword: string) => {
     console.log('res: ', res);
     const $ = cheerio.load(res);
     $('.result-list .result-item.result-game-item').each((index: number, ele: any) => {
-      // const title = $(ele).find('a.result-game-item-title-link span').text();
-      // const author = $(ele).find('.result-game-item-info .result-game-item-info-tag:nth-child(1) span:nth-child(2').text();
-      // const path = $(ele).find('a.result-game-item-pic-link').attr().href;
       const title = $(ele).find('a.result-game-item-title-link span').text();
       const author = $(ele).find('.result-game-item-info .result-game-item-info-tag:nth-child(1) span:nth-child(2)').text();
       const path = $(ele).find('a.result-game-item-pic-link').attr().href;
