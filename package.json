@@ -3,6 +3,11 @@
 	"displayName": "@careteen/Knight",
 	"description": "Reading",
 	"version": "0.1.0",
+	"publisher": "careteen",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/careteenL/vscode-extension-knight.git"
+	},
 	"engines": {
 		"vscode": "^1.51.0"
 	},
