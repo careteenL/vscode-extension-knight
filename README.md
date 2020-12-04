@@ -8,14 +8,17 @@
 
 在`vscode`中打开`Extensions`搜索[@careteen/Knight](https://marketplace.visualstudio.com/items?itemName=careteen.knight)。
 
+![vscode-extension-knight](./assets/vscode-extension-knight.gif)
+
+
 ## Features
 
 📚快乐读书，疯狂输出。
 
-TODO:
+✨ 支持在线阅读小说。
 
 ## ChangeLog
 
 ### 0.1.0
 
-TODO:
+✨ 支持在线阅读小说。

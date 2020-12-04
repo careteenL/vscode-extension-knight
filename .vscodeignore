@@ -2,6 +2,8 @@
 .vscode-test/**
 out/**
 src/**
+books/**
+assets/**
 .gitignore
 .yarnrc
 vsc-extension-quickstart.md
