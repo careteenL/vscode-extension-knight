@@ -1,10 +1,12 @@
-import { TreeDataProvider, TreeItem } from "vscode";
+import { Event, EventEmitter, TreeDataProvider, TreeItem, TreeItemCollapsibleState } from "vscode";
 import * as Fs from 'fs';
 import * as Path from 'path';
+import { getChapter } from "./online";
 
 interface Novel {
   name: string;
   path: string;
+  isDirectory?: boolean;
 }
 export class NovelTreeItem extends TreeItem {
   info: Novel;
@@ -28,16 +30,68 @@ export class NovelTreeItem extends TreeItem {
   }
 }
 
-const localNovelsPath = `/Users/careteen/Desktop/repos/careteen/@careteen/vscode-extension-knight/books`;
-// const LocalNovelsPath = '/Users/apple/Desktop/sohu/myself/myself-privilege/util/vscode/vscode-extension-knight/books';
+export class OnlineTreeItem extends TreeItem {
+  info: Novel;
+  contextValue = 'online';
+  constructor(info: Novel) {
+    super(`${info.name}`);
+    const tips = [
+      `名称：${info.name}`
+    ];
+    this.info = info;
+    this.tooltip = tips.join('\r\n');
+    this.collapsibleState = info.isDirectory ? TreeItemCollapsibleState.Collapsed : TreeItemCollapsibleState.None;
+    this.command = info.isDirectory ? undefined : {
+      command: 'Knight.openOnlineNovel',
+      title: '打开该网络小说',
+      arguments: [
+        {
+          name: info.name,
+          path: info.path
+        }
+      ]
+    };
+  }
+}
+
+// const localNovelsPath = `/Users/careteen/Desktop/repos/careteen/@careteen/vscode-extension-knight/books`;
+const localNovelsPath = '/Users/apple/Desktop/sohu/myself/myself-privilege/util/vscode/vscode-extension-knight/books';
 
 export default class DataProvider implements TreeDataProvider<any> {
-  getTreeItem(info: Novel): NovelTreeItem {
+
+  public refreshEvent: EventEmitter<Novel | null> = new EventEmitter<Novel | null>();
+
+  onDidChangeTreeData: Event<Novel | null> = this.refreshEvent.event;
+
+  public isOnline = false;
+
+  public treeNode: Novel[] = [];
+
+  constructor() {
+    getLocalBooks().then(res => {
+      this.treeNode = res;
+    });
+  }
+  
+  refresh(isOnline: boolean) {
+    this.isOnline = isOnline;
+    this.refreshEvent.fire(null);
+  }
+
+  getTreeItem(info: Novel): NovelTreeItem | OnlineTreeItem {
+    if (this.isOnline) {
+      return new OnlineTreeItem(info);
+    }
     return new NovelTreeItem(info);
   }
 
-  getChildren(): Promise<Novel[]> {
-    return getLocalBooks();
+  async getChildren(element?: Novel | undefined): Promise<Novel[]> {
+    console.log('element: ', element);
+    if (element) {
+      return await getChapter(element.path);
+    }
+    return this.treeNode;
+    // return getLocalBooks();
   }
 }
 

@@ -23,8 +23,25 @@
 			{
 				"command": "Knight.openSelectedNovel",
 				"title": "打开该小说"
+			},
+			{
+				"command": "Knight.openOnlineNovel",
+				"title": "打开该网络小说"
+			},
+			{
+				"command": "Knight.searchOnlineNovel",
+				"title": "搜索网络小说"
 			}
 		],
+		"menus": {
+			"view/title": [
+				{
+					"command": "Knight.searchOnlineNovel",
+					"when": "view == novel-list",
+					"group": "navigation"
+				}
+			]
+		},
 		"viewsContainers": {
 			"activitybar": [
 				{
@@ -69,5 +86,10 @@
 		"vscode-test": "^1.4.0",
 		"webpack": "^4.44.1",
 		"webpack-cli": "^3.3.12"
+	},
+	"dependencies": {
+		"@types/cheerio": "^0.22.22",
+		"cheerio": "^1.0.0-rc.3",
+		"https": "^1.0.0"
 	}
 }
