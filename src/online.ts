@@ -10,6 +10,7 @@ interface SearchResult {
   path: string;
 }
 
+// TODO: 提供多个源
 const DOMAIN = 'https://www.biquge.com.cn';
 
 export const search = async (keyword: string) => {
@@ -30,6 +31,10 @@ export const search = async (keyword: string) => {
         path,
       });
     });
+
+    if (result.length === 0) {
+      window.showWarningMessage(`该网站暂无"${keyword}"`);
+    }
     
   } catch (error) {
     console.error(error);
@@ -47,6 +52,8 @@ export const searchOnline = async (provider: DataProvider) => {
   if (msg) {
     provider.treeNode = await search(msg);
     provider.refresh(true);
+  } else {
+    window.showWarningMessage(`请输入小说名字`);
   }
 };
 

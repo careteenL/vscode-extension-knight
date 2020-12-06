@@ -31,14 +31,26 @@
 			{
 				"command": "Knight.searchOnlineNovel",
 				"title": "搜索网络小说"
+			},
+			{
+				"command": "Knight.addFavorite",
+				"title": "添加收藏"
 			}
 		],
 		"menus": {
+			"editor/context": [],
 			"view/title": [
 				{
 					"command": "Knight.searchOnlineNovel",
 					"when": "view == novel-list",
 					"group": "navigation"
+				}
+			],
+			"view/item/context": [
+				{
+					"command": "Knight.addFavorite",
+					"when": "view == novel-list && viewItem == online",
+					"group": "inline"
 				}
 			]
 		},
@@ -56,8 +68,24 @@
 				{
 					"id": "novel-list",
 					"name": "本地列表栏"
+				},
+				{
+					"id": "favorite-novel",
+					"name": "收藏的网络小说"
 				}
 			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "小说插件配置",
+			"properties": {
+				"novel.favorites": {
+					"type": "array",
+					"default": [],
+					"scope": "window",
+					"description": "小说收藏单"
+				}
+			}
 		}
 	},
 	"scripts": {
