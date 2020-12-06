@@ -2,7 +2,7 @@
 .vscode-test/**
 out/**
 src/**
-books/**
+# books/**
 assets/**
 .gitignore
 .yarnrc
