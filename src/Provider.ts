@@ -1,7 +1,7 @@
 import { Event, EventEmitter, ExtensionContext, TreeDataProvider } from "vscode";
 import * as Fs from 'fs';
 import * as Path from 'path';
-import { Novel } from "./Novel";
+import { Novel } from "./index.d";
 import { getChapter } from "./online";
 import NovelTreeItem from "./NovelTreeItem";
 import OnlineTreeItem from "./OnlineTreeItem";

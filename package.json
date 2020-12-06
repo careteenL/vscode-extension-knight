@@ -84,6 +84,12 @@
 					"default": [],
 					"scope": "window",
 					"description": "小说收藏单"
+				},
+				"novel.progress": {
+					"type": "object",
+					"default": {},
+					"scope": "window",
+					"description": "本地小说进度条"
 				}
 			}
 		}

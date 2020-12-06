@@ -1,6 +1,6 @@
 import { Event, EventEmitter, TreeDataProvider, workspace } from "vscode";
 import { CONFIG_FAVORITES } from "./constant";
-import { Novel } from "./Novel";
+import { Novel } from "./index.d";
 import OnlineTreeItem from "./OnlineTreeItem";
 import { getChapter } from "./online";
 

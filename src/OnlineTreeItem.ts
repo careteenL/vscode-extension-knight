@@ -1,5 +1,5 @@
 import { TreeItem, TreeItemCollapsibleState } from "vscode";
-import { Novel } from "./Novel";
+import { Novel } from "./index.d";
 
 export default class OnlineTreeItem extends TreeItem {
   info: Novel;

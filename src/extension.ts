@@ -1,12 +1,12 @@
 import * as vscode from 'vscode';
 import * as Fs from 'fs';
+import * as Path from 'path';
 
 import Provider from './Provider';
 import FavoriteProvider from './FavoriteProvider';
 import { getContent, searchOnline } from './online';
-import { CONFIG_FAVORITES } from './constant';
-import { Novel } from './Novel';
-
+import { CONFIG_FAVORITES, CONFIG_PROGRESS } from './constant';
+import { Novel, WebviewMessage } from './index.d';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -26,12 +26,48 @@ export function activate(context: vscode.ExtensionContext) {
 			enableScripts: true,
 			retainContextWhenHidden: true,
 		});
+
+		const cssSrc = panel.webview.asWebviewUri(vscode.Uri.file(Path.join(context.extensionPath, 'static', 'localnovel.css')));
+		const jsSrc = panel.webview.asWebviewUri(vscode.Uri.file(Path.join(context.extensionPath, 'static', 'localnovel.js')));
+
+		const config = vscode.workspace.getConfiguration();
+		const handeMessage = (message: WebviewMessage) => {
+			const progressSetting = config.get(CONFIG_PROGRESS, {} as any);
+			progressSetting[args.name] = message.progress;
+			console.log(message, progressSetting);
+			switch (message.command) {
+				case 'updateProgress':
+					return config.update(CONFIG_PROGRESS, progressSetting, true);
+				default:
+					vscode.window.showWarningMessage('webview发送了未知消息');
+					break;
+			}
+		};
+
+		const defaultProgress = {} as any;
+		defaultProgress[args.name] = 0;
+		console.log('aaa', config.get(CONFIG_PROGRESS, {}));
+		const postedMessage: WebviewMessage = {
+			command: 'goProgress',
+			progress: config.get(CONFIG_PROGRESS, defaultProgress)[args.name]
+		};
+		console.log('postedMessage: ', postedMessage);
+		// 读取本地进度告知webview
+		panel.webview.postMessage(postedMessage);
+		// 接受webview传来的进度条
+		panel.webview.onDidReceiveMessage(handeMessage, undefined, context.subscriptions);
 		panel.webview.html = `<html>
-			<body style="color: red;">
-				<pre style="flex: 1 1 auto; white-space: pre-wrap; word-wrap: break-word;">
-					${result}
-				</pre>
+			<head>
+				<link rel="stylesheet" href="${cssSrc}">
+			</head>
+			<body>
+				<div class="content">
+					<pre style="flex: 1 1 auto; white-space: pre-wrap; word-wrap: break-word;">
+						${result}
+					</pre>
+				</div>
 			</body>
+			<script src="${jsSrc}"></script>
 		</html>`;
 	});
 	context.subscriptions.push(disposableSelectedNovel);
