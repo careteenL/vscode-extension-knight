@@ -15,16 +15,11 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:Knight.helloWorld",
 		"onView:novel-list"
 	],
 	"main": "./dist/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "Knight.helloWorld",
-				"title": "Hello World"
-			},
 			{
 				"command": "Knight.openSelectedNovel",
 				"title": "打开该小说"
