@@ -1,9 +1,14 @@
 # Change Log
 
-All notable changes to the "vscode-extension-knight" extension will be documented in this file.
+### 0.5.0
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+✨ 支持本地进度条
+### 0.4.1
 
-## [Unreleased]
+🐛 修复本地阅读
+### 0.4.0
 
-- Initial release
+✨ 支持添加收藏
+### 0.1.0
+
+✨ 支持在线阅读小说
