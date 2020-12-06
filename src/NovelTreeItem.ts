@@ -1,5 +1,5 @@
 import { TreeItem } from "vscode";
-import { Novel } from "./Novel";
+import { Novel } from "./index.d";
 
 export default class NovelTreeItem extends TreeItem {
   info: Novel;
