@@ -31,7 +31,7 @@ export function activate(context: vscode.ExtensionContext) {
 		const jsSrc = panel.webview.asWebviewUri(vscode.Uri.file(Path.join(context.extensionPath, 'static', 'localnovel.js')));
 
 		const config = vscode.workspace.getConfiguration();
-		const handeMessage = (message: WebviewMessage) => {
+		const handleMessage = (message: WebviewMessage) => {
 			const progressSetting = config.get(CONFIG_PROGRESS, {} as any);
 			progressSetting[args.name] = message.progress;
 			console.log(message, progressSetting);
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 		// 读取本地进度告知webview
 		panel.webview.postMessage(postedMessage);
 		// 接受webview传来的进度条
-		panel.webview.onDidReceiveMessage(handeMessage, undefined, context.subscriptions);
+		panel.webview.onDidReceiveMessage(handleMessage, undefined, context.subscriptions);
 		panel.webview.html = `<html>
 			<head>
 				<link rel="stylesheet" href="${cssSrc}">

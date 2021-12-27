@@ -22,3 +22,15 @@
 ✨ 支持本地进度条
 
 [CHANGELOG](./CHANGELOG.md)
+
+## Contribution
+
+```shell
+# start develop
+yarn
+yarn start
+# package
+yarn package:all
+# publish
+yarn publish:all
+```

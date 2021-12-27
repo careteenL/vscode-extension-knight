@@ -2,7 +2,7 @@
 	"name": "knight",
 	"displayName": "@careteen/Knight",
 	"description": "Reading",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"publisher": "careteen",
 	"repository": {
 		"type": "git",
@@ -96,6 +96,7 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run package",
+		"start": "yarn watch",
 		"compile": "webpack --devtool nosources-source-map --config ./build/node-extension.webpack.config.js",
 		"watch": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/node-extension.webpack.config.js",
 		"package": "webpack --mode production --config ./build/node-extension.webpack.config.js",
@@ -103,7 +104,9 @@
 		"test-watch": "tsc -watch -p ./",
 		"pretest": "yarn run test-compile && yarn run lint",
 		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
+		"test": "node ./out/test/runTest.js",
+		"package:all": "npm i -g vsce && vsce package",
+		"publish:all": "vsce publish"
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.3",
